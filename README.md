@@ -13,7 +13,7 @@ A FastAPI-based URL shortener with a clean TailwindCSS UI, analytics, custom ali
 ## Setup
 ```bash
 python -m venv venv
-source venv/bin/activate
+source venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env
 uvicorn app.main:app --reload
