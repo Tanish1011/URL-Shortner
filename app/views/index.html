@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-white dark:bg-gray-800 p-6 rounded shadow">
+    <form id="shorten-form" class="flex gap-2">
+        <input type="url" name="url" placeholder="Enter URL" class="flex-1 border p-2 rounded" required>
+        <input type="text" name="alias" placeholder="Custom alias (optional)" class="border p-2 rounded">
+        <input type="date" name="expiresAt" class="border p-2 rounded">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Shorten</button>
+    </form>
+</div>
+<div class="mt-6">
+    <table class="w-full table-auto border-collapse">
+        <thead>
+            <tr>
+                <th>Original URL</th>
+                <th>Short URL</th>
+                <th>Clicks</th>
+                <th>Last Visited</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in urls %}
+            <tr>
+                <td class="truncate max-w-xs">{{ u.original_url }}</td>
+                <td><a href="/{{ u.code }}" class="text-blue-500">/{{ u.code }}</a></td>
+                <td>{{ u.clicks }}</td>
+                <td>{{ u.last_visited or "-" }}</td>
+                <td>
+                    <button class="copy-btn" data-url="http://127.0.0.1:8000/{{ u.code }}">Copy</button>
+                    <button class="delete-btn" data-code="{{ u.code }}">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
